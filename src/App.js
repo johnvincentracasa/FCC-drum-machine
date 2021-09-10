@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, {useState} from 'react'
+
 import './App.css';
+import Keypads from './components/Keypads';
+import Controls from './components/Controls';
+import {bankOne, bankTwo} from './data'
+
+const banks = {
+  'Heater Kit' : bankOne,
+  'Smooth Piano Kit' : bankTwo
+}
 
 function App() {
+
+  const [selectedBank, setSelectedBank] = useState(banks['Heater Kit'])
+
+
+  // create handle select bank then pass to controls component
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <div className="keypads__container">
+      {selectedBank.map( (keypad) => {
+                return <Keypads keypad={keypad}/>
+            })}
+      </div>
+      <Controls/>
+      
     </div>
   );
 }
