@@ -1,17 +1,16 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 
-function Keypads({ keypad }) {
-  let letter = keypad.keyCode;
-
+function Keypads({ keypad, setPlayedSound }) {
   const playSound = useCallback(() => {
     const soundKey = document.getElementById(keypad.keyTrigger);
     soundKey.currentTime = 0;
     soundKey.play();
-  }, [keypad]);
+    setPlayedSound(keypad.id);
+  }, [keypad, setPlayedSound]);
 
   useEffect(() => {
     const handleKeyPress = (e) => {
-      if (e.keyCode === letter) {
+      if (e.keyCode === keypad.keyCode) {
         playSound();
       }
     };
@@ -20,12 +19,14 @@ function Keypads({ keypad }) {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [letter, playSound]);
+  }, [keypad, playSound]);
 
   return (
-    <div onClick={playSound} className="keypads__btn" id={keypad.id}>
-      <audio src={keypad.url} id={keypad.keyTrigger}></audio>
-      {keypad.keyTrigger}
+    <div className="keypad__container">
+      <div onClick={playSound} className="keypads__btn" id={keypad.id}>
+        <audio src={keypad.url} id={keypad.keyTrigger}></audio>
+        {keypad.keyTrigger}
+      </div>
     </div>
   );
 }
