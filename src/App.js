@@ -11,20 +11,37 @@ export const banks = [
 
 function App() {
 
+  const [power, setPower] = useState(true)
   const [selectedBank, setSelectedBank] = useState(banks[0])
-  const [playedSound, setPlayedSound] = useState('')
+  const [display, setDisplay] = useState('')
+  const [volume, setVolume] = useState(0.3)
 
-  
+
+
 
   // create handle select bank then pass to controls component
 
   return (
     <div className="App">      
       {selectedBank.map((keypad) => {
-        return <Keypads keypad={keypad} setPlayedSound={setPlayedSound}/>
+        return <Keypads 
+        keypad={keypad} 
+        setDisplay={setDisplay}
+        power={power}
+        volume ={volume}
+        key={keypad.id}
+         />
       })}
 
-      <Controls selectedBank={selectedBank} setSelectedBank={setSelectedBank} playedSound={playedSound}/>
+      <Controls 
+        selectedBank={selectedBank} 
+        setSelectedBank={setSelectedBank} 
+        display={display} 
+        power={power} 
+        setPower={setPower}
+        volume={volume}
+        setVolume={setVolume}
+        />
     </div>
   );
 }

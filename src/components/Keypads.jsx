@@ -1,12 +1,15 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback } from "react";
 
-function Keypads({ keypad, setPlayedSound }) {
+function Keypads({ keypad, setDisplay, power, volume }) {
   const playSound = useCallback(() => {
-    const soundKey = document.getElementById(keypad.keyTrigger);
-    soundKey.currentTime = 0;
-    soundKey.play();
-    setPlayedSound(keypad.id);
-  }, [keypad, setPlayedSound]);
+    if (power) {
+      const soundKey = document.getElementById(keypad.keyTrigger);
+      soundKey.volume = volume;
+      soundKey.currentTime = 0;
+      soundKey.play();
+      setDisplay(keypad.id);
+    }
+  }, [keypad, setDisplay, power, volume]);
 
   useEffect(() => {
     const handleKeyPress = (e) => {
