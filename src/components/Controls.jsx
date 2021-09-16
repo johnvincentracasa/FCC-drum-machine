@@ -22,29 +22,29 @@ function Controls({
     power ? setPower(false) : setPower(true);
   };
   return (
-    <div>
-      <label className="switch">
-        <input type="checkbox" onClick={handleBankClink} />
-        <span className="slider round"></span>
-      </label>
-
+    <div className="controls_container">
       <label className="switch">
         <input type="checkbox" onClick={handlePowerClick} />
         <span className="slider round"></span>
       </label>
 
+      <span id="display">{display}</span>
+
       <input
         type="range"
         min="0"
         max="1"
-        step="0.01"
+        step="0.05"
         value={volume}
         onChange={(event) => {
           setVolume(event.target.value);
         }}
       />
 
-      <span>{display}</span>
+      <label className="switch">
+        <input type="checkbox" onClick={handleBankClink} />
+        <span className="slider round"></span>
+      </label>
     </div>
   );
 }

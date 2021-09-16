@@ -25,11 +25,9 @@ function Keypads({ keypad, setDisplay, power, volume }) {
   }, [keypad, playSound]);
 
   return (
-    <div className="keypad__container">
-      <div onClick={playSound} className="keypads__btn" id={keypad.id}>
-        <audio src={keypad.url} id={keypad.keyTrigger}></audio>
-        {keypad.keyTrigger}
-      </div>
+    <div className="drum-pad" onClick={playSound} id={keypad.id}>
+      <audio src={keypad.url} className="clip" id={keypad.keyTrigger}></audio>
+      {keypad.keyTrigger}
     </div>
   );
 }
