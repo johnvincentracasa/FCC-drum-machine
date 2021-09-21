@@ -9,9 +9,9 @@ export const banks = [bankOne, bankTwo];
 function App() {
   const [power, setPower] = useState(true);
   const [selectedBank, setSelectedBank] = useState(banks[0]);
-  const [display, setDisplay] = useState("");
+  const [display, setDisplay] = useState("On");
   const [volume, setVolume] = useState(0.3);
-
+  const [active, setActive] = useState(false)
   // create handle select bank then pass to controls component
 
   return (
@@ -34,6 +34,7 @@ function App() {
         selectedBank={selectedBank}
         setSelectedBank={setSelectedBank}
         display={display}
+        setDisplay={setDisplay}
         power={power}
         setPower={setPower}
         volume={volume}

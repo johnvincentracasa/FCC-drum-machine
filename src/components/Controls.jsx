@@ -5,6 +5,7 @@ function Controls({
   display,
   setSelectedBank,
   selectedBank,
+  setDisplay,
   power,
   setPower,
   volume,
@@ -13,13 +14,21 @@ function Controls({
   const handleBankClink = () => {
     if (selectedBank === banks[0]) {
       setSelectedBank(banks[1]);
+      setDisplay("Bank 2");
     } else {
       setSelectedBank(banks[0]);
+      setDisplay("Bank 1");
     }
   };
 
   const handlePowerClick = () => {
-    power ? setPower(false) : setPower(true);
+    if (power) {
+      setPower(false);
+      setDisplay("Off");
+    } else {
+      setPower(true);
+      setDisplay("On");
+    }
   };
   return (
     <div className="controls_container">
@@ -28,7 +37,18 @@ function Controls({
         <span className="slider round"></span>
       </label>
 
-      <span id="display">{display}</span>
+      <span
+        id="display"
+        style={{
+          background: "rgb(191, 168, 212)",
+          padding: "10px 20px",
+          borderRadius: "5px",
+          width: "6rem",
+          textAlign: "center",
+        }}
+      >
+        {display}
+      </span>
 
       <input
         type="range"
